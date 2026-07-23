@@ -23,7 +23,7 @@ async def health_check():
         "status": "Ok"
     }
 
-@app.get("/tasks")
+@app.get("/tasks", summary="Get all tasks", description="Returns a list of all tasks")
 async def get_tasks():
     return list_of_tasks
 
