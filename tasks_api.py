@@ -40,3 +40,19 @@ async def create_task(task: dict):
     task["id"] = task_id
     list_of_tasks.append(task)
     return task
+
+@app.put("/tasks/{task_id}")
+async def update_task(task_id: int, updated_task: dict):
+    for task in list_of_tasks:
+        if task["id"] == task_id:
+            task.update(updated_task)
+            return task
+    return { "error": f"Task {task_id} not found" }
+
+@app.delete("/tasks/{task_id}")
+async def delete_task(task_id: int):
+    for task in list_of_tasks:
+        if task["id"] == task_id:
+            list_of_tasks.remove(task)
+            return { "message": f"Task {task_id} deleted" }
+    return { "error": f"Task {task_id} not found" }
