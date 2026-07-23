@@ -33,3 +33,10 @@ async def get_task(task_id: int):
         if task["id"] == task_id:
             return task
     return { "error": f"Task {task_id} not found" }
+
+@app.post("/tasks")
+async def create_task(task: dict):
+    task_id = len(list_of_tasks) + 1
+    task["id"] = task_id
+    list_of_tasks.append(task)
+    return task
